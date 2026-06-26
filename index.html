@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-         :root {
+        :root {
             --black: #0a0a0a;
             --white: #ffffff;
             --gray-light: #f4f4f5;
@@ -28,73 +28,319 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-         ::-webkit-scrollbar { width: 6px; }
-         ::-webkit-scrollbar-track { background: var(--white); }
-         ::-webkit-scrollbar-thumb { background: var(--black); border-radius: 10px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--black);
+            border-radius: 10px;
+        }
 
         /* شاشة التحميل */
         #loading-screen {
-            position: fixed; inset: 0; background: var(--white); z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .loading-img { width: 180px; height: auto; margin-bottom: 20px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        .thin-text { font-family: 'Cairo', sans-serif; font-weight: 900; letter-spacing: 1px; margin-top: 15px; color: var(--black); text-transform: uppercase; font-size: 24px;}
-        .loader-circle { width: 40px; height: 40px; border: 3px solid #e5e5e5; border-top-color: var(--black); border-radius: 50%; animation: spin 1s linear infinite; margin-top: 15px;}
-        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-img {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .thin-text {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            color: var(--black);
+            text-transform: uppercase;
+            font-size: 24px;
+        }
+
+        .loader-circle {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e5e5e5;
+            border-top-color: var(--black);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         /* الأنيميشن */
-        .reveal-up { opacity: 0; transform: translateY(40px); animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        @keyframes revealUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* الاستيكرات الطائرة */
-        .floating-sticker { position: fixed; z-index: 999999; pointer-events: none; display: flex; flex-direction: column; align-items: center; animation: popInAndOut 4s forwards; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); }
-        .floating-sticker img { width: 130px; height: auto; object-fit: contain; }
-        .floating-message { background: var(--black); color: var(--white); padding: 6px 18px; border-radius: 20px; font-weight: 900; font-size: 14px; margin-top: -10px; border: 2px solid var(--white); text-align: center; max-width: 220px; line-height: 1.4; box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.3); }
-        @keyframes popInAndOut { 0% { opacity: 0; transform: translateY(50px) scale(0.5) rotate(-10deg); } 10% { opacity: 1; transform: translateY(0) scale(1.1) rotate(5deg); } 15% { transform: translateY(0) scale(1) rotate(0deg); } 85% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-50px) scale(0.8); } }
+        .floating-sticker {
+            position: fixed;
+            z-index: 999999;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: popInAndOut 4s forwards;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+        }
+
+        .floating-sticker img {
+            width: 130px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .floating-message {
+            background: var(--black);
+            color: var(--white);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            margin-top: -10px;
+            border: 2px solid var(--white);
+            text-align: center;
+            max-width: 220px;
+            line-height: 1.4;
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes popInAndOut {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.5) rotate(-10deg);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(0) scale(1.1) rotate(5deg);
+            }
+
+            15% {
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+
+            85% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.8);
+            }
+        }
 
         /* التصميم النقي B&W Neo-Brutalism */
-        .card-neo { background: var(--white); border: 2px solid var(--black); box-shadow: 8px 8px 0px 0px var(--black); transition: all 0.3s ease; }
-        .card-neo-hover:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px 0px var(--black); }
+        .card-neo {
+            background: var(--white);
+            border: 2px solid var(--black);
+            box-shadow: 8px 8px 0px 0px var(--black);
+            transition: all 0.3s ease;
+        }
 
-        .modern-input { width: 100%; background-color: var(--white); border: 2px solid #e5e5e5; padding: 1rem 1.5rem; font-size: 1.1rem; font-weight: 700; outline: none; transition: all 0.3s ease; }
-        .modern-input:focus { border-color: var(--black); box-shadow: 4px 4px 0px 0px var(--black); transform: translate(-2px, -2px); }
+        .card-neo-hover:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px 0px var(--black);
+        }
+
+        .modern-input {
+            width: 100%;
+            background-color: var(--white);
+            border: 2px solid #e5e5e5;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .modern-input:focus {
+            border-color: var(--black);
+            box-shadow: 4px 4px 0px 0px var(--black);
+            transform: translate(-2px, -2px);
+        }
 
         .btn-sweep {
-            position: relative; background: transparent; color: var(--black); border: 2px solid var(--black);
-            overflow: hidden; z-index: 1; transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
+            position: relative;
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--black);
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
         }
+
         .btn-sweep::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--black);
-            z-index: -1; transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--black);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .btn-sweep:hover::before { transform: scaleX(1); transform-origin: left; }
-        .btn-sweep:hover { color: var(--white); }
 
-        .radio-label { display: flex; align-items: center; padding: 1.25rem; border: 2px solid #e5e5e5; background: var(--white); cursor: pointer; transition: all 0.3s ease; }
-        .radio-label:hover { border-color: var(--black); }
-        .selected-answer { border-color: var(--black) !important; background-color: var(--black) !important; color: var(--white) !important; box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2); transform: translate(-2px, -2px); }
+        .btn-sweep:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
 
-        #progress-container { width: 100%; height: 4px; background: #e5e5e5; position: fixed; top: 0; left: 0; z-index: 50; }
-        #progress-bar { height: 100%; background: var(--black); width: 0%; transition: width 0.4s ease; }
-        #qrcode img { margin: 0 auto; border: 4px solid var(--black); padding: 10px; border-radius: 10px; }
+        .btn-sweep:hover {
+            color: var(--white);
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            border: 2px solid #e5e5e5;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-label:hover {
+            border-color: var(--black);
+        }
+
+        .selected-answer {
+            border-color: var(--black) !important;
+            background-color: var(--black) !important;
+            color: var(--white) !important;
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+            transform: translate(-2px, -2px);
+        }
+
+        #progress-container {
+            width: 100%;
+            height: 4px;
+            background: #e5e5e5;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: var(--black);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        #qrcode img {
+            margin: 0 auto;
+            border: 4px solid var(--black);
+            padding: 10px;
+            border-radius: 10px;
+        }
 
         .fake-fullscreen {
-            position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important;
-            max-width: none !important; z-index: 99999 !important; border-radius: 0 !important; border: none !important;
-            display: flex !important; flex-direction: column !important; justify-content: center !important; background: #000 !important;
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            z-index: 99999 !important;
+            border-radius: 0 !important;
+            border: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            background: #000 !important;
         }
-        .fake-fullscreen .video-wrapper { flex: 1 !important; height: 100% !important; display: flex; flex-direction: column; justify-content: center; background: #000; }
-        
+
+        .fake-fullscreen .video-wrapper {
+            flex: 1 !important;
+            height: 100% !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #000;
+        }
+
         @keyframes ripple {
-            0% { opacity: 0.8; transform: scale(0.9); }
-            100% { opacity: 0; transform: scale(1.5); }
+            0% {
+                opacity: 0.8;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
         }
-        .ripple-effect { animation: ripple 0.5s ease-out forwards; display: flex !important; }
+
+        .ripple-effect {
+            animation: ripple 0.5s ease-out forwards;
+            display: flex !important;
+        }
     </style>
 </head>
 
@@ -113,29 +359,35 @@
     <div class="container mx-auto px-4 max-w-3xl">
 
         <header class="text-center mb-10 reveal-up">
-            <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-black uppercase">أحمد <span class="font-light">تامر</span></h1>
-            
+            <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-black uppercase">أحمد <span
+                    class="font-light">تامر</span></h1>
+
             <p class="text-xl font-bold text-slate-800 -mt-1">أستاذ اللغة العربية</p>
-            
+
             <div class="w-16 h-1 bg-black mx-auto mt-4 mb-2"></div>
-            <p id="page-subtitle" class="font-bold tracking-widest text-gray-500 uppercase text-sm">بوابة الطالب الرئيسية</p>
+            <p id="page-subtitle" class="font-bold tracking-widest text-gray-500 uppercase text-sm">بوابة الطالب
+                الرئيسية</p>
         </header>
 
         <main id="home-section" class="reveal-up delay-100">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button onclick="goTo('quiz-login')" class="card-neo card-neo-hover p-10 text-center flex flex-col items-center justify-center bg-black text-white cursor-pointer group">
+                <button onclick="goTo('quiz-login')"
+                    class="card-neo card-neo-hover p-10 text-center flex flex-col items-center justify-center bg-black text-white cursor-pointer group">
                     <i class="fa-solid fa-file-signature text-5xl mb-4 group-hover:scale-110 transition-transform"></i>
                     <h2 class="text-2xl font-black tracking-wider uppercase">منصة الاختبارات</h2>
                     <p class="text-sm text-gray-400 mt-2">امتحن واعرف مستواك</p>
                 </button>
 
-                <button onclick="goTo('lectures')" class="card-neo card-neo-hover p-10 text-center flex flex-col items-center justify-center cursor-pointer group hover:bg-gray-50">
-                    <i class="fa-solid fa-video text-5xl mb-4 text-black group-hover:scale-110 transition-transform"></i>
+                <button onclick="goTo('lectures')"
+                    class="card-neo card-neo-hover p-10 text-center flex flex-col items-center justify-center cursor-pointer group hover:bg-gray-50">
+                    <i
+                        class="fa-solid fa-video text-5xl mb-4 text-black group-hover:scale-110 transition-transform"></i>
                     <h2 class="text-2xl font-black tracking-wider uppercase text-black">مكتبة المحاضرات</h2>
                     <p class="text-sm text-gray-500 mt-2">شاهد الفيديوهات والشروحات</p>
                 </button>
 
-                <button onclick="openSupport()" class="card-neo card-neo-hover p-6 text-center flex items-center justify-center gap-4 cursor-pointer md:col-span-2 hover:bg-gray-50">
+                <button onclick="openSupport()"
+                    class="card-neo card-neo-hover p-6 text-center flex items-center justify-center gap-4 cursor-pointer md:col-span-2 hover:bg-gray-50">
                     <i class="fa-brands fa-whatsapp text-3xl text-black"></i>
                     <h2 class="text-xl font-black tracking-wider uppercase text-black">تواصل مع الدعم الفني</h2>
                 </button>
@@ -156,9 +408,24 @@
                 <div class="mb-6">
                     <select id="video-class-filter" class="modern-input py-3" onchange="loadStudentVideos()">
                         <option value="all">عرض كل الصفوف</option>
-                        <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
-                        <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
-                        <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
+                        <optgroup label="المرحلة الابتدائية">
+                            <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
+                            <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                            <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                            <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                            <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                            <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+                        </optgroup>
+                        <optgroup label="المرحلة الإعدادية">
+                            <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                            <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                            <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                        </optgroup>
+                        <optgroup label="المرحلة الثانوية">
+                            <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                            <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                            <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -173,42 +440,75 @@
 
             <div class="card-neo p-8 md:p-12 reveal-up">
                 <h2 class="text-2xl font-black text-center mb-8 uppercase tracking-wide">بيانات الطالب</h2>
-                <h2 class="text-2xl font-black text-center mb-8 uppercase tracking-wide">(يتم فتح الاختبار مره واحده للجهاز الواحد)</h2>
+                <h2 class="text-2xl font-black text-center mb-8 uppercase tracking-wide">(يتم فتح الاختبار مره واحده
+                    للجهاز الواحد)</h2>
                 <div class="space-y-6">
                     <div>
-                        <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">اسم الطالب</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">اسم
+                            الطالب</label>
                         <input id="inputName" type="text" placeholder="الاسم ثلاثي" class="modern-input">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">كود الطالب <span class="text-xs text-red-500">(إنجليزي وأرقام فقط)</span></label>
-                        <input id="inputCode" type="text" placeholder="مثال: T1234" class="modern-input text-center font-mono uppercase tracking-widest" dir="ltr" oninput="sanitizeCode(this)">
+                        <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">كود الطالب
+                            <span class="text-xs text-red-500">(إنجليزي وأرقام فقط)</span></label>
+                        <input id="inputCode" type="text" placeholder="مثال: T1234"
+                            class="modern-input text-center font-mono uppercase tracking-widest" dir="ltr"
+                            oninput="sanitizeCode(this)">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">رقم الهاتف</label>
-                            <input id="inputPhone" type="tel" placeholder="01..." class="modern-input text-center" dir="ltr">
+                            <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">رقم
+                                الهاتف</label>
+                            <input id="inputPhone" type="tel" placeholder="01..." class="modern-input text-center"
+                                dir="ltr">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">الصف الدراسي</label>
+                            <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">الصف
+                                الدراسي</label>
                             <select id="inputClass" class="modern-input">
-                                <option value="" disabled selected>اختر الصف...</option>
-                                <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
-                                <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
-                                <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
+                                <option value="" disabled selected>اختر المرحلة أو الصف...</option>
+                                <optgroup label="المرحلة الابتدائية">
+                                    <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
+                                    <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                                    <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                                    <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                                    <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                                    <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+                                </optgroup>
+                                <optgroup label="المرحلة الإعدادية">
+                                    <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                                    <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                                    <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                                </optgroup>
+                                <optgroup label="المرحلة الثانوية">
+                                    <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                                    <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                                    <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
+                                </optgroup>
                             </select>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">أيام الحضور (المجموعة)</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider mb-2 text-gray-500">أيام الحضور
+                            (المجموعة)</label>
                         <select id="inputGroup" class="modern-input">
                             <option value="" disabled selected>اختر يوم المجموعة...</option>
-                            <option value="السبت">السبت</option><option value="الأحد">الأحد</option><option value="الإثنين">الإثنين</option><option value="الثلاثاء">الثلاثاء</option><option value="الأربعاء">الأربعاء</option><option value="الخميس">الخميس</option><option value="الجمعة">الجمعة</option>
+                            <option value="السبت">السبت</option>
+                            <option value="الأحد">الأحد</option>
+                            <option value="الإثنين">الإثنين</option>
+                            <option value="الثلاثاء">الثلاثاء</option>
+                            <option value="الأربعاء">الأربعاء</option>
+                            <option value="الخميس">الخميس</option>
+                            <option value="الجمعة">الجمعة</option>
                         </select>
                     </div>
-                    <button id="loginBtn" onclick="handleLogin()" class="w-full btn-sweep py-4 text-lg font-black mt-4 flex items-center justify-center gap-3">
+                    <button id="loginBtn" onclick="handleLogin()"
+                        class="w-full btn-sweep py-4 text-lg font-black mt-4 flex items-center justify-center gap-3">
                         <span>فحص وبدء الاختبار</span><i class="fa-solid fa-bolt"></i>
                     </button>
-                    <p id="loginError" class="hidden text-white bg-black p-4 font-bold text-center text-sm border-l-4 border-red-500"></p>
+                    <p id="loginError"
+                        class="hidden text-white bg-black p-4 font-bold text-center text-sm border-l-4 border-red-500">
+                    </p>
                 </div>
             </div>
         </section>
@@ -219,12 +519,14 @@
                     <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1" id="displayGroupInfo"></p>
                     <p id="displayStudentName" class="text-xl font-black"></p>
                 </div>
-                <div id="displayClassName" class="border-2 border-black px-6 py-2 font-bold text-sm uppercase tracking-wide"></div>
+                <div id="displayClassName"
+                    class="border-2 border-black px-6 py-2 font-bold text-sm uppercase tracking-wide"></div>
             </div>
 
             <div id="quizContainer">
                 <form id="quizForm" class="space-y-8"></form>
-                <button id="submitBtn" onclick="submitQuiz()" class="w-full btn-sweep py-5 text-xl font-black mt-12 flex items-center justify-center gap-3 reveal-up delay-300">
+                <button id="submitBtn" onclick="submitQuiz()"
+                    class="w-full btn-sweep py-5 text-xl font-black mt-12 flex items-center justify-center gap-3 reveal-up delay-300">
                     <span>اعتماد الإجابات وإنهاء</span><i class="fa-solid fa-check"></i>
                 </button>
             </div>
@@ -246,53 +548,67 @@
                 <p id="resCode" class="text-2xl font-black font-mono"></p>
             </div>
 
-            <button onclick="location.reload()" class="mt-8 font-bold underline text-gray-500 hover:text-black">العودة للرئيسية</button>
+            <button onclick="location.reload()" class="mt-8 font-bold underline text-gray-500 hover:text-black">العودة
+                للرئيسية</button>
         </section>
 
         <footer class="mt-16 mb-8 reveal-up">
-            <div class="card-neo p-6 md:p-10 bg-black text-white text-center flex flex-col items-center justify-center gap-4 relative overflow-hidden group">
-                <div class="absolute -left-6 -bottom-6 text-gray-800 opacity-30 text-8xl group-hover:rotate-12 transition-transform duration-500">
+            <div
+                class="card-neo p-6 md:p-10 bg-black text-white text-center flex flex-col items-center justify-center gap-4 relative overflow-hidden group">
+                <div
+                    class="absolute -left-6 -bottom-6 text-gray-800 opacity-30 text-8xl group-hover:rotate-12 transition-transform duration-500">
                     <i class="fa-solid fa-code"></i>
                 </div>
-                <p class="text-xs md:text-sm font-bold tracking-[0.3em] text-gray-400 uppercase z-10">Designed & Developed by</p>
+                <p class="text-xs md:text-sm font-bold tracking-[0.3em] text-gray-400 uppercase z-10">Designed &
+                    Developed by</p>
                 <h3 class="text-2xl md:text-4xl font-black uppercase tracking-widest z-10 mb-2">Abd Elrahman Tarek</h3>
-                <a href="https://man9000442-hub.github.io/Eng-Abdelrahman-prot/" target="_blank" class="z-10 bg-white text-black border-2 border-white hover:bg-black hover:text-white transition-all duration-300 px-8 py-3 font-black text-sm uppercase flex items-center gap-3 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+                <a href="https://man9000442-hub.github.io/Eng-Abdelrahman-prot/" target="_blank"
+                    class="z-10 bg-white text-black border-2 border-white hover:bg-black hover:text-white transition-all duration-300 px-8 py-3 font-black text-sm uppercase flex items-center gap-3 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
                     <span>Press Here</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
             </div>
         </footer>
     </div>
 
-    <div id="supportModal" class="fixed inset-0 bg-white/90 backdrop-blur-sm z-50 hidden flex flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+    <div id="supportModal"
+        class="fixed inset-0 bg-white/90 backdrop-blur-sm z-50 hidden flex flex-col items-center justify-center p-4 opacity-0 transition-opacity duration-300">
         <div class="card-neo w-full max-w-sm p-8 relative">
-            <button onclick="closeSupport()" class="absolute top-4 left-4 text-gray-400 hover:text-black text-2xl"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="closeSupport()" class="absolute top-4 left-4 text-gray-400 hover:text-black text-2xl"><i
+                    class="fa-solid fa-xmark"></i></button>
             <h2 class="text-2xl font-black mb-6 text-center uppercase border-b-2 border-gray-100 pb-4">تواصل معنا</h2>
-            <a href="https://wa.me/201000000000" target="_blank" class="block btn-sweep py-4 text-center font-bold text-lg mb-3">
+            <a href="https://wa.me/201000000000" target="_blank"
+                class="block btn-sweep py-4 text-center font-bold text-lg mb-3">
                 <i class="fa-brands fa-whatsapp ml-2"></i> رسالة واتساب
             </a>
         </div>
     </div>
 
-    <div id="videoModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] hidden flex-col items-center justify-center p-0 md:p-10 opacity-0 transition-opacity duration-300">
-        
-        <button onclick="closeVideoModal()" id="closeVideoBtn" class="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-red-500 transition text-2xl md:text-4xl z-[110] bg-black/50 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+    <div id="videoModal"
+        class="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] hidden flex-col items-center justify-center p-0 md:p-10 opacity-0 transition-opacity duration-300">
+
+        <button onclick="closeVideoModal()" id="closeVideoBtn"
+            class="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-red-500 transition text-2xl md:text-4xl z-[110] bg-black/50 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        
-        <div id="videoPlayerContainer" class="w-full max-w-5xl bg-black md:rounded-xl overflow-hidden border-0 md:border-2 border-gray-700 shadow-[0_0_40px_rgba(255,255,255,0.1)] relative flex flex-col transition-all duration-300">
-            
+
+        <div id="videoPlayerContainer"
+            class="w-full max-w-5xl bg-black md:rounded-xl overflow-hidden border-0 md:border-2 border-gray-700 shadow-[0_0_40px_rgba(255,255,255,0.1)] relative flex flex-col transition-all duration-300">
+
             <div class="relative w-full aspect-video bg-black video-wrapper flex-shrink-0">
-                
-                <div id="touchOverlay" class="absolute inset-0 z-10 cursor-pointer flex justify-between overflow-hidden">
-                    
-                    <div id="rewindIndicator" class="hidden w-1/3 h-full flex-col items-center justify-center bg-white/20 text-white rounded-r-[100%] pointer-events-none">
+
+                <div id="touchOverlay"
+                    class="absolute inset-0 z-10 cursor-pointer flex justify-between overflow-hidden">
+
+                    <div id="rewindIndicator"
+                        class="hidden w-1/3 h-full flex-col items-center justify-center bg-white/20 text-white rounded-r-[100%] pointer-events-none">
                         <i class="fa-solid fa-backward-rotate-10 text-3xl md:text-5xl mb-2"></i>
                         <span class="font-bold text-sm md:text-base">-10 ثواني</span>
                     </div>
 
                     <div class="w-1/3 h-full pointer-events-none"></div>
 
-                    <div id="forwardIndicator" class="hidden w-1/3 h-full flex-col items-center justify-center bg-white/20 text-white rounded-l-[100%] pointer-events-none">
+                    <div id="forwardIndicator"
+                        class="hidden w-1/3 h-full flex-col items-center justify-center bg-white/20 text-white rounded-l-[100%] pointer-events-none">
                         <i class="fa-solid fa-forward-rotate-10 text-3xl md:text-5xl mb-2"></i>
                         <span class="font-bold text-sm md:text-base">+10 ثواني</span>
                     </div>
@@ -301,28 +617,39 @@
                 <div id="youtubePlayer" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
             </div>
 
-            <div id="customVideoControls" class="bg-gradient-to-t from-black/90 to-transparent text-white p-3 md:p-4 flex items-center gap-3 md:gap-4 z-20 absolute bottom-0 left-0 right-0 transition-opacity duration-300">
-                
-                <button onclick="togglePlayPause()" id="playPauseBtn" class="text-white hover:text-cyan-400 transition text-2xl w-8 flex justify-center drop-shadow-md">
+            <div id="customVideoControls"
+                class="bg-gradient-to-t from-black/90 to-transparent text-white p-3 md:p-4 flex items-center gap-3 md:gap-4 z-20 absolute bottom-0 left-0 right-0 transition-opacity duration-300">
+
+                <button onclick="togglePlayPause()" id="playPauseBtn"
+                    class="text-white hover:text-cyan-400 transition text-2xl w-8 flex justify-center drop-shadow-md">
                     <i class="fa-solid fa-play"></i>
                 </button>
 
-                <div class="text-xs md:text-sm font-mono text-white w-12 text-center drop-shadow-md" id="timeDisplay">0:00</div>
-                
-                <input type="range" id="progressBar" class="flex-1 accent-cyan-500 cursor-pointer h-1.5 bg-white/30 rounded-lg appearance-none drop-shadow-md" min="0" max="100" value="0" step="0.1" oninput="seekVideoDrag(this.value)" onchange="seekVideoDrop(this.value)">
-                
-                <button onclick="changeSpeed()" id="speedBtn" class="text-xs font-black text-white hover:text-cyan-400 transition min-w-[30px] drop-shadow-md">1x</button>
+                <div class="text-xs md:text-sm font-mono text-white w-12 text-center drop-shadow-md" id="timeDisplay">
+                    0:00</div>
 
-                <button onclick="toggleMute()" id="muteBtn" class="text-white hover:text-cyan-400 transition w-8 drop-shadow-md">
+                <input type="range" id="progressBar"
+                    class="flex-1 accent-cyan-500 cursor-pointer h-1.5 bg-white/30 rounded-lg appearance-none drop-shadow-md"
+                    min="0" max="100" value="0" step="0.1" oninput="seekVideoDrag(this.value)"
+                    onchange="seekVideoDrop(this.value)">
+
+                <button onclick="changeSpeed()" id="speedBtn"
+                    class="text-xs font-black text-white hover:text-cyan-400 transition min-w-[30px] drop-shadow-md">1x</button>
+
+                <button onclick="toggleMute()" id="muteBtn"
+                    class="text-white hover:text-cyan-400 transition w-8 drop-shadow-md">
                     <i class="fa-solid fa-volume-high"></i>
                 </button>
-                
-                <button onclick="toggleFakeFullscreen()" class="text-white hover:text-cyan-400 transition w-8 drop-shadow-md">
+
+                <button onclick="toggleFakeFullscreen()"
+                    class="text-white hover:text-cyan-400 transition w-8 drop-shadow-md">
                     <i class="fa-solid fa-expand"></i>
                 </button>
             </div>
         </div>
-        <h3 id="videoModalTitle" class="text-white mt-4 text-lg md:text-2xl font-black tracking-wide text-center uppercase px-4 z-[110]"></h3>
+        <h3 id="videoModalTitle"
+            class="text-white mt-4 text-lg md:text-2xl font-black tracking-wide text-center uppercase px-4 z-[110]">
+        </h3>
     </div>
 
     <script>
@@ -387,7 +714,7 @@
                 <div class="floating-message">${msg}</div>
             `;
             document.body.appendChild(div);
-            
+
             setTimeout(() => { div.remove(); }, 4000);
         }
         // -----------------------------------------
@@ -461,12 +788,12 @@
             const form = document.getElementById("quizForm");
             form.innerHTML = questions.map((q, i) => `
                 <div class="card-neo p-6 md:p-8 reveal-up" style="animation-delay: ${i * 0.1}s">
-                    <div class="flex gap-4 mb-6"><span class="text-4xl font-black text-gray-200">0${i+1}</span><p class="font-bold text-xl pt-2">${q.text}</p></div>
+                    <div class="flex gap-4 mb-6"><span class="text-4xl font-black text-gray-200">0${i + 1}</span><p class="font-bold text-xl pt-2">${q.text}</p></div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 choices-area">
                         ${q.choices.map((c, index) => {
-                            const choiceLetter = ["A", "B", "C", "D"][index];
-                            return `<label class="radio-label"><input type="radio" name="q${q.id}" value="${choiceLetter}" class="hidden" onchange="updateProgress()"><div class="w-5 h-5 border-2 border-black rounded-full ml-3 flex items-center justify-center indicator transition-all"></div><span class="font-bold">${c}</span></label>`;
-                        }).join("")}
+                const choiceLetter = ["A", "B", "C", "D"][index];
+                return `<label class="radio-label"><input type="radio" name="q${q.id}" value="${choiceLetter}" class="hidden" onchange="updateProgress()"><div class="w-5 h-5 border-2 border-black rounded-full ml-3 flex items-center justify-center indicator transition-all"></div><span class="font-bold">${c}</span></label>`;
+            }).join("")}
                     </div>
                 </div>`).join("");
 
@@ -493,14 +820,14 @@
             questions.forEach(q => { const picked = document.querySelector(`input[name="q${q.id}"]:checked`); if (picked && picked.value === q.correct) score++; });
             try {
                 await supabaseRequest('POST', 'tamer_results', '', { student_name: student.name, student_code: student.code, class_name: student.className, group_name: student.groupName, quiz_id: currentQuizId, score: score, total_questions: questions.length });
-                
+
                 localStorage.setItem('tamer_completed_quiz_' + currentQuizId, 'true');
 
                 student.score = `${score}/${questions.length}`;
                 const encryptedText = CryptoJS.AES.encrypt(JSON.stringify({ name: student.name, code: student.code, score: student.score }), SECRET_KEY).toString();
                 document.getElementById("progress-container").classList.add("hidden"); document.getElementById("quiz-section").classList.add("hidden"); document.getElementById("finalResultContainer").classList.remove("hidden");
                 document.getElementById("resCode").textContent = student.code;
-                new QRCode(document.getElementById("qrcode"), { text: encryptedText, width: 220, height: 220, colorDark : "#000", colorLight : "#fff", correctLevel : QRCode.CorrectLevel.H });
+                new QRCode(document.getElementById("qrcode"), { text: encryptedText, width: 220, height: 220, colorDark: "#000", colorLight: "#fff", correctLevel: QRCode.CorrectLevel.H });
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } catch (error) { alert("خطأ بالحفظ."); btn.disabled = false; btn.innerHTML = '<span>اعتماد</span> <i class="fa-solid fa-check"></i>'; }
         }
@@ -516,7 +843,7 @@
         let currentSpeedIdx = 0;
 
         function extractYouTubeID(url) { const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/); return (match && match[2].length === 11) ? match[2] : null; }
-        function onYouTubeIframeAPIReady() {}
+        function onYouTubeIframeAPIReady() { }
 
         function openVideoModal(url, title) {
             const videoId = extractYouTubeID(url); if (!videoId) { alert("رابط غير صالح."); return; }
@@ -531,7 +858,7 @@
                     events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
                 });
             } else { ytPlayer.loadVideoById(videoId); }
-            
+
             document.getElementById('speedBtn').innerText = '1x'; currentSpeedIdx = 0; document.getElementById('progressBar').value = 0;
             showControlsTemporarily();
         }
@@ -539,8 +866,8 @@
         function closeVideoModal() {
             const modal = document.getElementById('videoModal');
             modal.classList.add('opacity-0');
-            setTimeout(() => { 
-                modal.classList.add('hidden'); 
+            setTimeout(() => {
+                modal.classList.add('hidden');
                 if (ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
                 clearInterval(progressInterval);
                 const container = document.getElementById('videoPlayerContainer');
@@ -562,7 +889,7 @@
         function togglePlayPause() { if (isPlaying) ytPlayer.pauseVideo(); else ytPlayer.playVideo(); }
 
         function changeSpeed() {
-            if(ytPlayer && ytPlayer.setPlaybackRate) {
+            if (ytPlayer && ytPlayer.setPlaybackRate) {
                 currentSpeedIdx = (currentSpeedIdx + 1) % speeds.length;
                 ytPlayer.setPlaybackRate(speeds[currentSpeedIdx]);
                 document.getElementById('speedBtn').innerText = speeds[currentSpeedIdx] + 'x';
@@ -570,7 +897,7 @@
         }
 
         function toggleMute() {
-            if (isMuted) { ytPlayer.unMute(); isMuted = false; document.getElementById('muteBtn').innerHTML = '<i class="fa-solid fa-volume-high"></i>'; } 
+            if (isMuted) { ytPlayer.unMute(); isMuted = false; document.getElementById('muteBtn').innerHTML = '<i class="fa-solid fa-volume-high"></i>'; }
             else { ytPlayer.mute(); isMuted = true; document.getElementById('muteBtn').innerHTML = '<i class="fa-solid fa-volume-xmark"></i>'; }
         }
 
@@ -580,7 +907,7 @@
         function startProgressBar() {
             clearInterval(progressInterval);
             progressInterval = setInterval(() => {
-                if(ytPlayer && ytPlayer.getCurrentTime && !isDragging) {
+                if (ytPlayer && ytPlayer.getCurrentTime && !isDragging) {
                     const time = ytPlayer.getCurrentTime(); const dur = ytPlayer.getDuration();
                     document.getElementById('progressBar').value = (time / dur) * 100;
                     document.getElementById('timeDisplay').innerText = formatTime(time);
@@ -588,13 +915,13 @@
             }, 500);
         }
 
-        function formatTime(sec) { if(!sec) return "0:00"; const m = Math.floor(sec / 60); const s = Math.floor(sec % 60); return `${m}:${s < 10 ? '0' : ''}${s}`; }
+        function formatTime(sec) { if (!sec) return "0:00"; const m = Math.floor(sec / 60); const s = Math.floor(sec % 60); return `${m}:${s < 10 ? '0' : ''}${s}`; }
 
         let lastTapTime = 0;
         let tapTimeout;
         const DOUBLE_TAP_DELAY = 300;
 
-        document.getElementById('touchOverlay').addEventListener('click', function(e) {
+        document.getElementById('touchOverlay').addEventListener('click', function (e) {
             const currentTime = new Date().getTime();
             const tapLength = currentTime - lastTapTime;
             const rect = this.getBoundingClientRect();
@@ -641,7 +968,7 @@
             const controls = document.getElementById('customVideoControls');
             const closeBtn = document.getElementById('closeVideoBtn');
             const title = document.getElementById('videoModalTitle');
-            
+
             if (controls.classList.contains('opacity-0')) {
                 controls.classList.remove('opacity-0', 'pointer-events-none');
                 closeBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -659,7 +986,7 @@
             const controls = document.getElementById('customVideoControls');
             const closeBtn = document.getElementById('closeVideoBtn');
             const title = document.getElementById('videoModalTitle');
-            
+
             controls.classList.remove('opacity-0', 'pointer-events-none');
             closeBtn.classList.remove('opacity-0', 'pointer-events-none');
             title.classList.remove('opacity-0');
@@ -682,7 +1009,7 @@
 
         function toggleFakeFullscreen() {
             const container = document.getElementById('videoPlayerContainer');
-            
+
             if (!document.fullscreenElement && !container.classList.contains('fake-fullscreen')) {
                 if (container.requestFullscreen) {
                     container.requestFullscreen().catch(err => { container.classList.add('fake-fullscreen'); });
@@ -691,7 +1018,7 @@
                 } else {
                     container.classList.add('fake-fullscreen');
                 }
-                
+
                 if (screen.orientation && screen.orientation.lock) {
                     screen.orientation.lock("landscape").catch(e => console.log(e));
                 }
@@ -700,7 +1027,7 @@
                     document.exitFullscreen();
                 }
                 container.classList.remove('fake-fullscreen');
-                
+
                 if (screen.orientation && screen.orientation.unlock) {
                     screen.orientation.unlock();
                 }
@@ -709,4 +1036,5 @@
         }
     </script>
 </body>
+
 </html>
